@@ -19,7 +19,20 @@
                     <h1 class="title">Песнь льда и пламени</h1>
                     <p>Серия фэнтези-романов Джорджа Мартина</p>
                     <p>В настоящее время опубликовано пять романов из запланированных семи</p>
-                </div> 
+                    <button class="form-button" onclick="openForm()">Добавить книгу</button>
+                    <div class="form-container" id="formContainer">
+                        <div class="form">
+                            <input id="name" class="input" placeholder="Название книги"/>
+                            <input id="author" class="input" placeholder="Автор книги"/>
+                        </div>
+                        <div class="form">
+                            <input id="year" class="input" placeholder="Год издания книги"/>
+                            <input id="image" class="input" placeholder="Ссылка на изображение"/>
+                        </div>
+                        <button class="addBook-button" onclick="addBook()">Сохранить</button>
+                
+                    </div>
+                    
                 <div class="books-container" id="books-container">
 
                 </div>
