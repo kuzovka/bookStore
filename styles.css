@@ -68,10 +68,17 @@ p {
     font-size: 15px;
 }
 
-:hover.add-button {
+:hover.form-button {
     background-color:rgb(221, 217, 217);
     transition: .3s;
+    cursor: pointer;
     
+}
+
+:hover.addBook-button {
+    background-color:rgb(221, 217, 217);
+    transition: .3s;
+    cursor: pointer;
 }
 
 .form-container {
@@ -90,6 +97,12 @@ p {
     font-size: 15px;
     color: var(--dark-color);
     border: 1px solid var(--dark-color);
+
+}
+
+:focus.input {
+    background-color: var(--light-color);
+    border: 2px solid red
 
 }
 
