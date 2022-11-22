@@ -1,4 +1,4 @@
-const books = [
+let books = [
     {
       id: 1,
       title: 'Игра престолов',
@@ -37,7 +37,19 @@ const books = [
     ]
 
     const container = document.getElementById("books-container")
-    const form = document.getElementById("formContainer")
+    const addModal = document.getElementById("add-modal")
+    const closeModalButton = document.getElementById("close-modal-button")
+    const openModelButton = document.getElementById("open-modal-button")
+    const saveButton = document.getElementById("save-modal-button")
+
+    function closeModal() {
+      addModal.style.display = 'none'
+    }
+
+    function openModal() {
+      addModal.style.display = 'flex'
+    }
+
 
     function renderBooks() {
       container.innerHTML = ""
@@ -53,23 +65,23 @@ const books = [
                     <p class="book-authors">${book.authors}</p>
                     </div>
                   <div class="book-button">
-                    <button onclick='deleteBook(${book.id})' class="btn">Удалить</button>
+                    <button onclick='deleteBook(${book.id})' class="delete-button">Удалить</button>
                   </div>
               </div>
           `
       }) 
     }
 
-    function openForm() {
-      form.style.display = "block"
-    }
-    
-
     function clearForm() {
       document.getElementById('name').value = ""
       document.getElementById('author').value = ""
       document.getElementById('year').value = ""
       document.getElementById('image').value = ""
+    }
+
+    function saveToLocalStorage() {
+      const booksJson = JSON.stringify(books)
+      localStorage.setItem("books", booksJson)
     }
 
     function deleteBook (id) {
@@ -79,6 +91,7 @@ const books = [
       const bookIndex = books.indexOf(book)
       books.splice(bookIndex, 1)
       renderBooks()
+      saveToLocalStorage()
     }
 
     function addBook () {
@@ -93,16 +106,25 @@ const books = [
         year: yearValue,
         image: imageValue
       }
-
-      form.style.display = "none" 
-
+      
       books.push(book)
       renderBooks()
       clearForm()
+      closeModal()
+      saveToLocalStorage()
 
     }
 
+    closeModalButton.addEventListener('click', closeModal)
+    openModelButton.addEventListener('click', openModal)
+    saveButton.addEventListener('click', addBook)
 
+    const booksJson = localStorage.getItem('books')
+    const savedBooks = JSON.parse(booksJson)
+    if (booksJson) {
+      books = savedBooks
+    }
     renderBooks()
 
+   
 

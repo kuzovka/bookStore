@@ -19,18 +19,21 @@
                     <h1 class="title">Песнь льда и пламени</h1>
                     <p>Серия фэнтези-романов Джорджа Мартина</p>
                     <p>В настоящее время опубликовано пять романов из запланированных семи</p>
-                    <button class="form-button" onclick="openForm()">Добавить книгу</button>
-                    <div class="form-container" id="formContainer">
-                        <div class="form">
-                            <input id="name" class="input" placeholder="Название книги"/>
-                            <input id="author" class="input" placeholder="Автор книги"/>
+                    <button class="open-modal-button" id="open-modal-button">Добавить книгу</button>
+                    <div class="add-modal" id="add-modal">
+                        <div class="add-modal-content">
+                            <h1 class="new-book-title">Добавьте новую книгу </h1>
+                            <div class="form">
+                                <input id="name" class="input" placeholder="Название книги"/>
+                                <input id="author" class="input" placeholder="Автор книги"/>
+                            </div>
+                            <div class="form">
+                                <input id="year" class="input" placeholder="Год издания книги"/>
+                                <input id="image" class="input" placeholder="Ссылка на изображение"/>
+                            </div>
+                            <button class="save-modal-button" id="save-modal-button">Сохранить</button>
+                            <button class="close-modal-button" id="close-modal-button">Закрыть</button>
                         </div>
-                        <div class="form">
-                            <input id="year" class="input" placeholder="Год издания книги"/>
-                            <input id="image" class="input" placeholder="Ссылка на изображение"/>
-                        </div>
-                        <button class="addBook-button" onclick="addBook()">Сохранить</button>
-                
                     </div>
                     
                 <div class="books-container" id="books-container">
