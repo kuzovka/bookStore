@@ -1,34 +1,36 @@
+let count = 0
+
 let books = [
     {
-      id: 1,
+      id: count++,
       title: 'Игра престолов',
       authors: 'Джордж Мартин',
       year: '1996',
       image: 'https://m.media-amazon.com/images/I/51IHAPK5fsL._AC_UY218_.jpg'
     },
     {
-      id: 2,
+      id: count++,
       title: 'Битва королей',
       authors: 'Джордж Мартин',
       year: '1998',
       image: 'https://m.media-amazon.com/images/I/7152-qeQl7L._AC_UY218_.jpg'
     },
     {
-      id: 3,
+      id: count++,
       title:'Буря мечей',
       authors: 'Джордж Мартин',
       year: '2000',
       image:'https://m.media-amazon.com/images/I/61hEC15CvWL._AC_UY218_.jpg'
     },
     {
-      id: 4,
+      id: count++,
       title:'Пир стервятников',
       authors: 'Джордж Мартин',
       year: '2005',
       image:'https://m.media-amazon.com/images/I/51UKUTiSDUL._AC_UY218_.jpg'
     },
     {
-      id: 5,
+      id: count++,
       title:'Танец с драконами',
       authors: 'Джордж Мартин',
       year: '2011',
@@ -41,6 +43,7 @@ let books = [
     const closeModalButton = document.getElementById("close-modal-button")
     const openModelButton = document.getElementById("open-modal-button")
     const saveButton = document.getElementById("save-modal-button")
+
 
     function closeModal() {
       addModal.style.display = 'none'
@@ -57,7 +60,7 @@ let books = [
           container.innerHTML += `
               <div class="book-item">
                   <div class="book-data">
-                    <div> 
+                    <div>
                       <img src ="${book.image}" class=class="book-image"/>
                     </div>
                     <h2 class="book-title">${book.title}</h2>
@@ -65,12 +68,32 @@ let books = [
                     <p class="book-authors">${book.authors}</p>
                     </div>
                   <div class="book-button">
-                    <button onclick='deleteBook(${book.id})' class="delete-button">Удалить</button>
+                    <button class="delete-button" id="delete-button-${book.id}">Удалить</button>
+                  </div>
+                  <div class="book-button">
+                    <button class="delete-button" id="updateButton-${book.id}">Обновить</button>
                   </div>
               </div>
           `
-      }) 
+      })
+
+      books.forEach((book) => {
+        document
+        .getElementById(`delete-button-${book.id}`)
+        .addEventListener("click", () => {
+        deleteBook(book.id);
+    });
+    });
+
+    books.forEach((book) => {
+      document.getElementById(`updateButton-${book.id}`).addEventListener("click", () => openUpdateModal(book.id))
+    })
+
+    saveToLocalStorage()
+
     }
+
+
 
     function clearForm() {
       document.getElementById('name').value = ""
@@ -99,14 +122,15 @@ let books = [
       const authorValue = document.getElementById('author').value
       const yearValue = document.getElementById('year').value
       const imageValue = document.getElementById('image').value
-      
+
       const book = {
+        id: count++,
         title: nameValue,
         authors: authorValue,
         year: yearValue,
         image: imageValue
       }
-      
+
       books.push(book)
       renderBooks()
       clearForm()
@@ -119,12 +143,71 @@ let books = [
     openModelButton.addEventListener('click', openModal)
     saveButton.addEventListener('click', addBook)
 
+
     const booksJson = localStorage.getItem('books')
     const savedBooks = JSON.parse(booksJson)
     if (booksJson) {
       books = savedBooks
     }
+
+    const updateModal = document.getElementById('update-modal')
+    const closeUpdateModalButton = document.getElementById("closeUpdateModalButton")
+    const updateBookButton = document.getElementById("updateBookButton")
+
+    closeUpdateModalButton.addEventListener("click", closeUpdateModal)
+    function closeUpdateModal() {
+      updateModal.style.display = "none"
+    }
+
+    function openUpdateModal (id) {
+      updateModal.style.display = "flex"
+
+      const currentBook = books.find(b => b.id === id)
+
+      document.getElementById('updateName').value = currentBook.title
+      document.getElementById('updateAuthor').value = currentBook.authors
+      document.getElementById('updateYear').value = currentBook.year
+      document.getElementById('updateImage').value = currentBook.image
+
+
+     const makeUpdate = () => updateBook(id, makeUpdate)
+
+      updateBookButton.addEventListener("click", makeUpdate)
+
+
+    }
+
+    function updateBook(id, makeUpdate) {
+      updateBookButton.removeEventListener("click", makeUpdate)
+
+      const oldBook = books.find(b => b.id === id)
+
+      const nameValue = document.getElementById('updateName').value
+      const authorValue = document.getElementById('updateAuthor').value
+      const yearValue = document.getElementById('updateYear').value
+      const imageValue = document.getElementById('updateImage').value
+
+      const newBook = {
+        id,
+        title: nameValue,
+        authors: authorValue,
+        year: yearValue,
+        image: imageValue
+      }
+
+      const bookIndex = books.indexOf(oldBook)
+      books.splice(bookIndex, 1, newBook)
+
+      renderBooks()
+      saveToLocalStorage()
+      closeUpdateModal()
+
+
+
+    }
+
+
     renderBooks()
 
-   
+
 

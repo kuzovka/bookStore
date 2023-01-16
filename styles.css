@@ -14,7 +14,7 @@ p {
     font-size: 22px;
     line-height: 1.5;
     letter-spacing: .8px;
-   
+
 }
 
 .header {
@@ -39,7 +39,7 @@ p {
 
     display: flex;
     flex-direction: column;
-   
+
 
 }
 
@@ -69,12 +69,12 @@ p {
 
 }
 
-:hover.open-modal-button {
+.open-modal-button:hover {
     background-color:rgb(221, 217, 217);
     transition: .3s;
     cursor: pointer;
     border: 1px solid var(--dark-color);
-    
+
 }
 
 .add-modal {
@@ -95,12 +95,13 @@ p {
     box-shadow: 1px 1px 10px 1px rgb(180, 176, 176);
     display: flex;
     flex-direction: column;
+    width: 500px;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    
+
 }
 
 .new-book-title {
@@ -121,11 +122,11 @@ p {
     border-radius: 7px;
     font-family: 'Jura', sans-serif;
     width: 100%;
-    
+
 
 }
 
-:focus.input {
+.input:focus {
     background-color: rgb(235, 230, 230);
 }
 
@@ -146,12 +147,12 @@ p {
     margin-bottom: 7px;
 }
 
-:hover.close-modal-button,
-:hover.save-modal-button{
+.close-modal-button:hover,
+.save-modal-button:hover {
     background-color: var(--light-color);
     transition: .3s;
     cursor: pointer;
-   
+
 }
 .books-container {
     display: flex;
@@ -175,10 +176,10 @@ p {
 
     border-radius: 12px;
     box-shadow: 1px 1px 5px 1px rgb(182, 166, 166);
-    
+
 
     width: calc(100% / 4 - 30px);
-    
+
 }
 
 
@@ -207,20 +208,21 @@ p {
     background-color: transparent;
     color: var(--dark-color);
     border-radius: 10px;
-    border: none;
+    border: 1px solid var(--dark-color);
     cursor: pointer;
-    
+    margin-bottom: 10px;
+
 }
-:hover.delete-button {
+.delete-button:hover {
     background-color:var(--light-color);
     transition: .3s;
-    
+
 }
 
 
 @media (max-width: 1024px) {
     .book-item {
-        width: calc(100% / 3 - 30px); 
+        width: calc(100% / 3 - 30px);
     }
     .intro {
         padding: 30px;
@@ -230,21 +232,21 @@ p {
     }
     p {
         font-size: 20px;
-    
+
 }
 
 }
 
 @media (max-width: 768px) {
     .book-item {
-        width: calc(100% / 2 - 30px); 
+        width: calc(100% / 2 - 30px);
     }
     .header {
         height: 250px;
     }
     p {
         font-size: 18px;
-    
+
     }
     .title {
         font-size: 35px;
@@ -254,16 +256,16 @@ p {
 
 @media (max-width: 617px) {
     .book-item {
-        width: calc(100% - 30px); 
+        width: calc(100% - 30px);
         margin: 20px 60px;
     }
-   
+
     .header {
         height: 150px;
     }
     p {
         font-size: 18px;
-    
+
     }
     .title {
         font-size: 30px;
@@ -273,10 +275,10 @@ p {
         flex-direction: column;
         align-items: center;
         margin: 0px;
-       
+
     }
     .input {
         margin-bottom: 10px;
     }
-   
+
 }
